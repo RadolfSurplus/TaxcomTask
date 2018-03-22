@@ -17,11 +17,6 @@ public class MainController {
         this.service = service;
     }
 
-    @GetMapping("/list")
-    public List<MainData> list() {
-        return service.findAll();
-    }
-
     @GetMapping("/search/{id}")
     public MainData findByUUID(@PathVariable UUID id) throws NotFoundException {
         if (service.findByUUID(id) == null)

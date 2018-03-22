@@ -24,7 +24,7 @@ public class MainDataAddition {
     private Integer value;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "data_id", nullable = false)
+    @JoinColumn(name = "main_id", nullable = false)
     @JsonBackReference
     private MainData mainData;
 

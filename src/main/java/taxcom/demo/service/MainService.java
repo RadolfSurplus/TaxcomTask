@@ -18,10 +18,6 @@ public class MainService {
         this.repository = repository;
     }
 
-    public void dataSave(MainData data) {
-        repository.save(data);
-    }
-
     public UUID saveJackson(String json) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         MainData data = objectMapper.readValue(json, MainData.class);
@@ -31,9 +27,5 @@ public class MainService {
 
     public MainData findByUUID(UUID id) {
         return repository.findById(id);
-    }
-
-    public List<MainData> findAll() {
-        return (List<MainData>) repository.findAll();
     }
 }

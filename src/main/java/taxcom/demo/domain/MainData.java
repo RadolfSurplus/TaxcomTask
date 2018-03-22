@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Entity
-@Table(name = "data")
+@Table(name = "main")
 public class MainData {
 
     @Id
@@ -46,11 +46,11 @@ public class MainData {
         this.date = date;
     }
 
-    public List<MainDataAddition> getDataAdditions() {
+    public List<MainDataAddition> getData() {
         return data;
     }
 
-    public void setDataAdditions(List<MainDataAddition> dataAdditions) {
-        this.data = dataAdditions;
+    public void setData(List<MainDataAddition> data) {
+        this.data = data;
     }
 }
