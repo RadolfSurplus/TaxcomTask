@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import taxcom.demo.domain.MainData;
 import taxcom.demo.service.MainService;
 
+import java.io.IOException;
 import java.util.*;
 
 @RestController
@@ -15,13 +16,18 @@ public class MainController {
         this.service = service;
     }
 
-    @RequestMapping("/")
+    @GetMapping("/list")
     public List<MainData> list() {
         return service.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<MainData> findByID(@PathVariable Integer id) {
-        return service.findByID(id);
+    public MainData findByUUID(@PathVariable UUID id) {
+        return service.findByUUID(id);
+    }
+
+    @PostMapping("/save")
+    public @ResponseBody UUID saveData(String json) throws IOException {
+        return service.saveJackson(json);
     }
 }

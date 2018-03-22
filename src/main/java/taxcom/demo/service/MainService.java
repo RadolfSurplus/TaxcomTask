@@ -1,11 +1,13 @@
 package taxcom.demo.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import taxcom.demo.domain.MainData;
 import taxcom.demo.repository.MainRepository;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class MainService {
@@ -20,11 +22,18 @@ public class MainService {
         repository.save(data);
     }
 
-    public List<MainData> findAll() {
-        return (List<MainData>) repository.findAll();
+    public UUID saveJackson(String json) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        MainData data = objectMapper.readValue(json, MainData.class);
+        repository.save(data);
+        return data.getId();
     }
 
-    public Optional<MainData> findByID(Integer id) {
+    public MainData findByUUID(UUID id) {
         return repository.findById(id);
+    }
+
+    public List<MainData> findAll() {
+        return (List<MainData>) repository.findAll();
     }
 }
