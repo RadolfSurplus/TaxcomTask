@@ -1,5 +1,6 @@
 package taxcom.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -15,6 +16,7 @@ public class MainData {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
+    @JsonIgnore
     private UUID id;
 
     @NotNull
@@ -23,7 +25,7 @@ public class MainData {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "mainData")
     @JsonManagedReference
-    private List<MainDataAddition> dataAdditions = new ArrayList<>();
+    private List<MainDataAddition> data = new ArrayList<>();
 
     public MainData() {
     }
@@ -45,10 +47,10 @@ public class MainData {
     }
 
     public List<MainDataAddition> getDataAdditions() {
-        return dataAdditions;
+        return data;
     }
 
     public void setDataAdditions(List<MainDataAddition> dataAdditions) {
-        this.dataAdditions = dataAdditions;
+        this.data = dataAdditions;
     }
 }

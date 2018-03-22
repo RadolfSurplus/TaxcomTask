@@ -1,6 +1,7 @@
 package taxcom.demo.controller;
 
 import org.springframework.web.bind.annotation.*;
+import taxcom.demo.controller.exception.NotFoundException;
 import taxcom.demo.domain.MainData;
 import taxcom.demo.service.MainService;
 
@@ -21,13 +22,16 @@ public class MainController {
         return service.findAll();
     }
 
-    @GetMapping("/{id}")
-    public MainData findByUUID(@PathVariable UUID id) {
-        return service.findByUUID(id);
+    @GetMapping("/search/{id}")
+    public MainData findByUUID(@PathVariable UUID id) throws NotFoundException {
+        if (service.findByUUID(id) == null)
+            throw new NotFoundException("There is no record with a specified UUID");
+        else
+            return service.findByUUID(id);
     }
 
     @PostMapping("/save")
-    public @ResponseBody UUID saveData(String json) throws IOException {
+    public @ResponseBody UUID saveData(@RequestBody String json) throws IOException {
         return service.saveJackson(json);
     }
 }
