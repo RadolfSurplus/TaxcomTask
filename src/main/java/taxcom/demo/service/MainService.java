@@ -5,6 +5,7 @@ import taxcom.demo.domain.MainData;
 import taxcom.demo.repository.MainRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MainService {
@@ -21,5 +22,9 @@ public class MainService {
 
     public List<MainData> findAll() {
         return (List<MainData>) repository.findAll();
+    }
+
+    public Optional<MainData> findByID(Integer id) {
+        return repository.findById(id);
     }
 }

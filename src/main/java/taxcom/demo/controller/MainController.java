@@ -1,11 +1,10 @@
 package taxcom.demo.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import taxcom.demo.domain.MainData;
 import taxcom.demo.service.MainService;
 
-import java.util.List;
+import java.util.*;
 
 @RestController
 public class MainController {
@@ -19,5 +18,10 @@ public class MainController {
     @RequestMapping("/")
     public List<MainData> list() {
         return service.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Optional<MainData> findByID(@PathVariable Integer id) {
+        return service.findByID(id);
     }
 }

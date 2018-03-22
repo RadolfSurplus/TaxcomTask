@@ -22,7 +22,7 @@ public class MainData {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "mainData")
     @JsonManagedReference
-    private List<MainDataAddition> dataAdditions = new LinkedList<>();
+    private List<MainDataAddition> dataAdditions = new ArrayList<>();
 
     public MainData() {
     }
