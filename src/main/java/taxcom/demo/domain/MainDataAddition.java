@@ -1,5 +1,6 @@
 package taxcom.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class MainDataAddition {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "data_id", nullable = false)
+    @JsonBackReference
     private MainData mainData;
 
     public MainDataAddition() {

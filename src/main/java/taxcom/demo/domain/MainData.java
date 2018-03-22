@@ -1,12 +1,11 @@
 package taxcom.demo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "data")
@@ -22,7 +21,8 @@ public class MainData {
     private Date date = new Date();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "mainData")
-    private Set<MainDataAddition> dataAdditions = new HashSet<>();
+    @JsonManagedReference
+    private List<MainDataAddition> dataAdditions = new LinkedList<>();
 
     public MainData() {
     }
@@ -39,11 +39,11 @@ public class MainData {
         this.date = date;
     }
 
-    public Set<MainDataAddition> getDataAdditions() {
+    public List<MainDataAddition> getDataAdditions() {
         return dataAdditions;
     }
 
-    public void setDataAdditions(Set<MainDataAddition> dataAdditions) {
+    public void setDataAdditions(List<MainDataAddition> dataAdditions) {
         this.dataAdditions = dataAdditions;
     }
 }

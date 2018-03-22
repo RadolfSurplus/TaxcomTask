@@ -23,7 +23,7 @@ public class DemoApplication implements CommandLineRunner {
 		for (int i = 0; i < 2; i++) {
 			MainData data = new MainData();
 			for (int j = 0; j < 2; j++) {
-				MainDataAddition addition = new MainDataAddition("Name = " + j, j);
+				MainDataAddition addition = new MainDataAddition("parent:" + i + " position:" + j, j);
 				addition.setMainData(data);
 				data.getDataAdditions().add(addition);
 			}
