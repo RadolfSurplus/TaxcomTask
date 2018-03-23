@@ -17,8 +17,8 @@ public class MainController {
         this.service = service;
     }
 
-    @GetMapping("/search/{id}")
-    public Optional<MainData> findByUUID(@PathVariable UUID id) throws NotFoundException {
+    @GetMapping("/search")
+    public Optional<MainData> findByUUID(@RequestParam(value = "id") UUID id) throws NotFoundException {
         if (!service.existByUUID(id))
             throw new NotFoundException("There is no record with a specified UUID");
         else
