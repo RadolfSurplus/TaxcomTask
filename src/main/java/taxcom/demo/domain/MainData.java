@@ -19,7 +19,6 @@ public class MainData {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
     @JsonIgnore
-    @NotNull
     private UUID id;
 
     @NotNull
