@@ -7,22 +7,26 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+//Дополнительная сущность - дочерний узел. Связь с родителем идет по принципу Many-to-One
 @Entity
 @Table(name = "additions")
 public class MainDataAddition {
 
+    //ID игнорируется при пересылке аннотацией @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
-    private Integer id;
+    private Long id;
 
     @NotNull
     @Size(max = 100)
     private String name;
 
     @NotNull
-    private Integer value;
+    private Long value;
 
+    //Поле для организации зависимости Many-to-One, указано аннотацией @JsonBackReference
+    //Отсылка на родителя хранится в ячейке main_id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "main_id", nullable = false)
     @JsonBackReference
@@ -31,12 +35,12 @@ public class MainDataAddition {
     public MainDataAddition() {
     }
 
-    public MainDataAddition(String name, Integer value) {
+    public MainDataAddition(String name, Long value) {
         this.name = name;
         this.value = value;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -48,11 +52,11 @@ public class MainDataAddition {
         this.name = name;
     }
 
-    public Integer getValue() {
+    public Long getValue() {
         return value;
     }
 
-    public void setValue(Integer value) {
+    public void setValue(Long value) {
         this.value = value;
     }
 

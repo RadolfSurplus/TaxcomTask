@@ -7,7 +7,5 @@ import javax.transaction.Transactional;
 import java.util.UUID;
 
 @Transactional
-public interface MainRepository extends CrudRepository<MainData, Integer> {
-
-    MainData findById(UUID id);
+public interface MainRepository extends CrudRepository<MainData, UUID> {
 }

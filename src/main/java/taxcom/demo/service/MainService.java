@@ -6,7 +6,7 @@ import taxcom.demo.domain.MainData;
 import taxcom.demo.repository.MainRepository;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -25,7 +25,11 @@ public class MainService {
         return data.getId();
     }
 
-    public MainData findByUUID(UUID id) {
+    public Optional<MainData> findByUUID(UUID id) {
         return repository.findById(id);
+    }
+
+    public boolean existByUUID(UUID id) {
+        return repository.existsById(id);
     }
 }

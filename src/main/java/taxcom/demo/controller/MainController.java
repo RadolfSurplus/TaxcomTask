@@ -18,8 +18,8 @@ public class MainController {
     }
 
     @GetMapping("/search/{id}")
-    public MainData findByUUID(@PathVariable UUID id) throws NotFoundException {
-        if (service.findByUUID(id) == null)
+    public Optional<MainData> findByUUID(@PathVariable UUID id) throws NotFoundException {
+        if (!service.existByUUID(id))
             throw new NotFoundException("There is no record with a specified UUID");
         else
             return service.findByUUID(id);

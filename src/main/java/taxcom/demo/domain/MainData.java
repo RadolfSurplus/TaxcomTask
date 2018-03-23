@@ -8,21 +8,25 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.*;
 
+//Основная сущность. Ключевым полем в БД является UUID, соединение с дочерними узлами идет по принципу One-to-Many
 @Entity
 @Table(name = "main")
 public class MainData {
 
+    //ID игнорируется при пересылке аннотацией @JsonIgnore
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(columnDefinition = "BINARY(16)")
     @JsonIgnore
+    @NotNull
     private UUID id;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date date = new Date();
 
+    //Поле для организации зависимости One-to-Many, указано аннотацией @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "mainData")
     @JsonManagedReference
     private List<MainDataAddition> data = new ArrayList<>();
@@ -32,10 +36,6 @@ public class MainData {
 
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public Date getDate() {
