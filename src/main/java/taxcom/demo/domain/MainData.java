@@ -23,12 +23,14 @@ public class MainData {
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "DATE")
     private Date date = new Date();
 
     //Поле для организации зависимости One-to-Many, указано аннотацией @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "mainData")
     @JsonManagedReference
-    private List<MainDataAddition> data = new ArrayList<>();
+    @Column(name = "DATA")
+    private Set<MainDataAddition> data = new HashSet<>();
 
     public MainData() {
     }
@@ -45,11 +47,11 @@ public class MainData {
         this.date = date;
     }
 
-    public List<MainDataAddition> getData() {
+    public Set<MainDataAddition> getData() {
         return data;
     }
 
-    public void setData(List<MainDataAddition> data) {
+    public void setData(Set<MainDataAddition> data) {
         this.data = data;
     }
 }

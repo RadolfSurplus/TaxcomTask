@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 //Дополнительная сущность - дочерний узел. Связь с родителем идет по принципу Many-to-One
 @Entity
-@Table(name = "additions")
+@Table(name = "addition")
 public class MainDataAddition {
 
     //ID игнорируется при пересылке аннотацией @JsonIgnore
@@ -20,15 +20,17 @@ public class MainDataAddition {
 
     @NotNull
     @Size(max = 100)
+    @Column(name = "NAME")
     private String name;
 
     @NotNull
+    @Column(name = "VALUE")
     private Long value;
 
     //Поле для организации зависимости Many-to-One, указано аннотацией @JsonBackReference
     //Отсылка на родителя хранится в ячейке main_id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "main_id", nullable = false)
+    @JoinColumn(name = "MAIN_ID", nullable = false)
     @JsonBackReference
     private MainData mainData;
 
